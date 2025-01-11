@@ -24,6 +24,42 @@ class MainNetflix extends Component {
         console.log("Errore: ", e);
       });
   };
+
+  loadGallery = () => {
+    this.fetchMovies("Dragon ball")
+      .then((HarryPotterMovies) => {
+        this.setState({ HarryPotter: HarryPotterMovies });
+      })
+      .catch((error) =>
+        console.error("Error fetching Dragon ball movies:", error)
+      );
+    this.fetchMovies("lord of the rings")
+      .then((LordRingsMovies) => {
+        this.setState({ LordOfRings: LordRingsMovies });
+      })
+      .catch((error) =>
+        console.error("Error fetching Lord of the Rings movies:", error)
+      );
+    this.fetchMovies("star wars")
+      .then((starwarsMovies) => {
+        this.setState({ StarWars: starwarsMovies });
+      })
+      .catch((error) =>
+        console.error("Error fetching Star Wars movies:", error)
+      );
+  };
+
+  componentDidMount() {
+    this.loadGallery();
+  }
+
+  render() {
+    return (
+      <>
+        <MainNetflix title="Dragon ball" movies={this.state.DragonBall} />
+      </>
+    );
+  }
 }
 
 export default MainNetflix;
